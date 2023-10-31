@@ -16,7 +16,8 @@ function App() {
     }, [posts]);
 
     const fetchBotResponse = async () => {
-      const { data } = await axios.post("http://localhost:4000",{ input },
+      const { data } = await axios.post("http://localhost:4000",
+        { input },
         {
           headers: {
             "Content-Type": "application/json",
@@ -48,7 +49,7 @@ function App() {
             } else {
                 clearInterval(interval);
             }
-        }, 20);
+        }, 50);
     };
 
     const onSubmit = () => {
@@ -57,8 +58,8 @@ function App() {
         updatePosts("loading...", false, true);
         setInput("");
         fetchBotResponse().then((res) => {
-          const botResponse = res.bot.trim(); // Extract the response text
-          updatePosts(botResponse, true);
+          console.log(res.bot.trim());
+          updatePosts(res.bot.trim(),true)
       });
     };
 
